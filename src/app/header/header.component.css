@@ -1,0 +1,12 @@
+.link{
+  box-shadow: none;
+}
+.dropdown-menu>li>a{
+  padding-left: 1em;
+  padding-right: 0;
+  text-decoration: none;
+  color: black;
+}
+.center{
+  justify-content: center;
+}

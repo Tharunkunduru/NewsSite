@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark px-0 sticky-top">
+  <div class="container-fluid d-flex flex-sm-row flex-column text-center px-1">
+    <div class="navbar-header d-flex flex-sm-row flex-column text-center">
+      <a class="navbar-brand center m-0" routerLink="/">NewsApp</a>
+      <ul class="navbar-nav d-flex flex-sm-row flex-column text-sm-center mx-1">
+        <li class="nav-item mx-1">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link" routerLink="/home">Favorite</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link" routerLink="/home">Recent</a>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-footer d-flex flex-column flex-sm-row">
+      <form class="form d-flex flex-column flex-sm-row mr-1" #form = 'ngForm' (ngSubmit)="submit(form)">
+        <input class="form-control mr-1" placeholder="search" type="text" name="search" ngModel required>
+        <button class="btn btn-outline-light form-inline-control" type="submit">Search</button>
+      </form>
+      <ul class="nav justify-content-center">
+        <li class="dropdown">
+          <a class="btn text-light btn-outline-light dropdown-toggle" data-toggle="dropdown" href="#">
+            Profile<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li class="dropdown-header" style="padding-left: 1em">@__username__</li>
+            <li class="">
+              <a class="nav-link" href="#">Profile</a>
+            </li>
+            <hr class="divider m-0">
+            <li class=""><a class="nav-link" href="#">LogOut</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

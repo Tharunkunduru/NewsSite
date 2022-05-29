@@ -1,0 +1,13 @@
+<div class="container-fluid card d-flex flex-column p-0 border-bottom-0">
+  <div class="card-header d-flex flex-row justify-content-between px-1 py-0 border-bottom-0">
+    <h5>{{heading}}</h5>
+    <a class="text-decoration-none text-black" [routerLink]="'./'" (click)="onSeeAllChange()">
+      <span *ngIf="!isFullScreen">Show All</span>
+      <span *ngIf="isFullScreen">Hide</span>
+    </a>
+  </div>
+  <div class="card-body d-flex flex-row scroll px-1 py-1"
+       [ngClass]="{ 'flex-wrap view' : isFullScreen, 'overflow' : !isFullScreen}">
+    <app-news-card *ngFor="let i of data" [data]="i"></app-news-card>
+  </div>
+</div>
