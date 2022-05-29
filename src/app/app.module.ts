@@ -10,6 +10,7 @@ import {RouterModule, Routes} from "@angular/router";
 import { IndividualCollectionComponent } from './individual-collection/individual-collection.component';
 import { HomeCollectionComponent } from './home-collection/home-collection.component';
 import {HttpClientModule} from "@angular/common/http";
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
 
 const routes: Routes=[
   {path:'home',component:HomeCollectionComponent},
@@ -32,6 +33,7 @@ const routes: Routes=[
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    InfiniteScrollModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
