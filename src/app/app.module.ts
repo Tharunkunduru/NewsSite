@@ -11,6 +11,8 @@ import { IndividualCollectionComponent } from './individual-collection/individua
 import { HomeCollectionComponent } from './home-collection/home-collection.component';
 import {HttpClientModule} from "@angular/common/http";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import { AlertComponent } from './shared/components/alert/alert.component';
+import { PlaceholderDirective } from './shared/directives/placeholder.directive';
 
 const routes: Routes=[
   {path:'home',component:HomeCollectionComponent},
@@ -27,6 +29,8 @@ const routes: Routes=[
     CardCollectionComponent,
     IndividualCollectionComponent,
     HomeCollectionComponent,
+    AlertComponent,
+    PlaceholderDirective,
   ],
   imports: [
     BrowserModule,

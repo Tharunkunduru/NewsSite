@@ -19,15 +19,12 @@ export class DatafetchService {
   }
 
   fetchWithKey(key:string,page:number):Observable<any>{
-    return this.http.get<any>(this.gen.getUrl(key,this._isFullView,page)+'&apiKey=837f153b83484a01b09283c18ac839ab').
+    return this.http.get<any>(this.gen.getUrl(key,this._isFullView,page)+'&apiKey=de6c0cfd55c34584b74a3cd51c42283a').
     pipe(map(data=>{
       return data['articles'];
     }),
     map(data => {
       return this.scrutiny(data);
-    }),
-    catchError(error => {
-      return error.error.message;
     }));
   }
 

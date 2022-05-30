@@ -18,7 +18,6 @@ export class UrlGenerationService {
   public fetchWithKey(key:string):string {
     let routeWords: string[] = this.routeWordGenerator(this.route.url);
     let url = ''
-    console.log(routeWords);
     if(routeWords[0]==='home'){
       url+= '/top-headlines';
     }
