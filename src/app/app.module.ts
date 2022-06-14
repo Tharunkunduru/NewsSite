@@ -31,11 +31,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserDetailsComponent } from './profile/user-details/user-details.component';
 import { ChangeEmailComponent } from './user/change-email/change-email.component';
 import {AuthInterceptor} from "./shared/interceptor/auth.interceptor";
-import {JwtModule} from "@auth0/angular-jwt";
 import { FullViewComponent } from './full-view/full-view.component';
 import {ExtendedModule} from "@angular/flex-layout";
 import { LogoutComponent } from './user/logout/logout.component';
 import { AlertNullRectifierPipe } from './shared/pipe/alert-null-rectifier.pipe';
+import { EmailCheckerDirective } from './shared/directives/email-checker.directive';
+import { PhoneNumberCheckerDirective } from './shared/directives/phone-number-checker.directive';
 
 const routes: Routes=[
   {path:'profile',canActivate:[LoginAuthenticationGuard],canActivateChild:[LoginAuthenticationGuard],canDeactivate:[LoginAuthenticationGuard],component:ProfileComponent
@@ -75,6 +76,8 @@ const routes: Routes=[
     FullViewComponent,
     LogoutComponent,
     AlertNullRectifierPipe,
+    EmailCheckerDirective,
+    PhoneNumberCheckerDirective,
   ],
   imports: [
     BrowserModule,

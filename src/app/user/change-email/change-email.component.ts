@@ -27,6 +27,7 @@ export class ChangeEmailComponent implements
     console.log(changeemailform);
     let val = changeemailform.form.value;
     if(val['email']===val['newemail']){
+      this.closeSub = this.alert.create(this.host.viewContainerRef,"Both old email and email should be different",AlertModel.danger);
       return ;
     }
     this.request.changeEmail(JSON.stringify({email:val['email'],password:val['password']}),

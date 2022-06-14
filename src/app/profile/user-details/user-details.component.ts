@@ -40,13 +40,11 @@ OnDestroy{
   }
 
   changeDetials(signupform: NgForm) {
-    console.log(signupform);
     this.data['dateOfBirth'] = formatDate(signupform.form.controls['dateOfBirth'].value,'yyyy-MM-dd','en','+0530').toString();
     console.log(this.data['dateOfBirth']);
     this.request.setUserDetails(this.data).subscribe(data=>{
       // @ts-ignore
       this.request.setUsername(this.data['username']);
-      console.log(data);
       this.closeSub = this.alert.create(this.host.viewContainerRef,"successfully modified the data",AlertModel.success);
     },
       error => {

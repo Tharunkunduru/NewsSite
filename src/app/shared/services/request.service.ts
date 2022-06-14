@@ -47,8 +47,7 @@ export class RequestService {
 
   getLocalStorage():string|null{
     let store:string|null = localStorage.getItem('user');
-    if(store!=null) return store;
-    return null;
+    return store;
   }
 
   setUsername(username:string){

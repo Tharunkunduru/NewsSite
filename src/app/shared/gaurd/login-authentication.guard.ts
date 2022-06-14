@@ -30,7 +30,7 @@ export class LoginAuthenticationGuard implements CanActivate, CanActivateChild, 
         return true;
       return this.router.createUrlTree(['/login']);
       })
-    )
+    );
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,

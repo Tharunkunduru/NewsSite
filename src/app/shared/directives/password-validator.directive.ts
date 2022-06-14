@@ -9,7 +9,6 @@ export class PasswordValidatorDirective implements Validator{
   @Input('password') prevPassword!:string|undefined;
   constructor() { }
   validate(control: AbstractControl): ValidationErrors | null {
-    console.log(this.prevPassword)
     if(this.prevPassword==undefined || control.value!=this.prevPassword){
       return { passwordMismatch:true,message:"must match with password" };
     }
