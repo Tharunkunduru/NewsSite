@@ -1,6 +1,8 @@
-import {Component, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AuthService} from "../shared/services/auth.service";
+import {RequestService} from "../shared/services/request.service";
 
 @Component({
   selector: 'app-header',
@@ -8,18 +10,32 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private routes:Router) {
+  username !:String|null;
+  isMenuCollapsed: boolean = true;
+  @ViewChild('view') view: any;
+  constructor(private routes:Router,
+              private auth: AuthService,
+              private request : RequestService,
+              private active: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    console.log(this.view);
+    this.username = this.request.getUsername();
   }
   ngOnChanges(changes: SimpleChanges): void {
+
     console.log(changes);
   }
 
   submit(form: NgForm) {
-    this.routes.navigate(['/search'],
-      { queryParams: { key: form.form.value.search },fragment:'results' });
+    console.log(form);
+    this.isMenuCollapsed = true;
+    this.routes.navigate(['/user',form.form.value.search]);
     form.reset();
+  }
+
+  logout() {
+    this.routes.navigate(['/logout']);
   }
 }

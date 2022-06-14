@@ -1,4 +1,4 @@
-import {Injectable, ViewContainerRef} from '@angular/core';
+import {EventEmitter, Injectable, ViewContainerRef} from '@angular/core';
 import {AlertComponent} from "../components/alert/alert.component";
 import {AlertModel} from "../components/alert/alert.model";
 import {Subscription} from "rxjs";
@@ -9,7 +9,7 @@ import {Subscription} from "rxjs";
 export class DynamicComponentService {
   public closeSub!:Subscription
   constructor() { }
-  create(viewContainerRef: ViewContainerRef,message:string,type:AlertModel,time?:number){
+  create(viewContainerRef: ViewContainerRef,message:string,type:AlertModel,time?:number):EventEmitter<void>{
     viewContainerRef.clear();
     const componentRef = viewContainerRef.createComponent<AlertComponent>(AlertComponent);
     componentRef.instance.data = message;
@@ -19,5 +19,6 @@ export class DynamicComponentService {
       this.closeSub.unsubscribe();
       viewContainerRef.clear();
     });
+    return componentRef.instance.close;
   }
 }

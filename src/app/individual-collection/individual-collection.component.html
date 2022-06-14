@@ -1,2 +1,2 @@
 <app-header></app-header>
-<app-card-collection [heading]="heading"></app-card-collection>
+<app-card-collection *ngFor="let i of category" [heading]="i"></app-card-collection>

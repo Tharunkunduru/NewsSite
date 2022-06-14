@@ -30,6 +30,9 @@ export class AlertComponent implements OnInit {
     else if(this.type === AlertModel.warning){
       this.color = '#c5b14e';
     }
+    else if(this.type === AlertModel.success){
+      this.color = '#457006';
+    }
   }
   closeMethod(){
     this.close.emit();

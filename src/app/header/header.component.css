@@ -10,3 +10,14 @@
 .center{
   justify-content: center;
 }
+.noeffects:focus{
+  box-shadow: none;
+}
+.width{
+
+}
+@media screen and (max-width: 599px) {
+  .width{
+    width: 100%;
+  }
+}

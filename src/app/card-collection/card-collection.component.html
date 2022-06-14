@@ -12,7 +12,7 @@
        infiniteScroll [scrollWindow]="false" [infiniteScrollDistance]=" isFullScreen ? 0.05 : 0.027 "
        [horizontal] = " !isFullScreen " [alwaysCallback]="true"
        [infiniteScrollThrottle]="1000" (scrolled)="onScroll($event)" >
-    <app-news-card *ngFor="let i of data" [data]="i"></app-news-card>
+    <app-news-card *ngFor="let i of data" [data]="i" [fav]="isfav(i)" [fullviewemitter]="fullviewcardDataEmitter"></app-news-card>
     <div class="row align-items-center" *ngIf="isLoading">
       <span class="spinner-border mx-3 p-3"></span>
     </div>

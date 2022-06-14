@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {SignupService} from "../../shared/services/signup.service";
-import {Credentialinterface} from "../../shared/interface/credentialinterface";
-import {Forminterface} from "../../shared/interface/forminterface";
-import {MAT_DATE_FORMATS} from "@angular/material/core";
 import {formatDate} from "@angular/common";
+import {AuthService} from "../../shared/services/auth.service";
+import {DynamicComponentService} from "../../shared/services/dynamic-component.service";
+import {PlaceholderDirective} from "../../shared/directives/placeholder.directive";
+import {AlertModel} from "../../shared/components/alert/alert.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -12,21 +13,24 @@ import {formatDate} from "@angular/common";
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
-  constructor(private signup: SignupService) { }
+  @ViewChild(PlaceholderDirective,{static: true}) host!: PlaceholderDirective;
+  constructor(private signup: AuthService,
+              private alert:DynamicComponentService,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
+
   }
 
   signUp(signupform: NgForm) {
-    console.log(signupform)
+    console.log(signupform);
     if(!signupform.form.valid) return ;
-    let formData : FormData = new FormData();
     let val = signupform.form.value;
     let data: object = {
       username:val['username'],
       email:val['email'],
-      dateofbirth: formatDate(val['dob'],'yyyy-MM-dd','en','+0530'),
+      dateOfBirth: formatDate(val['dob'],'yyyy-MM-dd','en','+0530'),
       phonenumber:val['phonenumber'],
       gender:val['gender'],
       nation:val['nation'],
@@ -37,21 +41,23 @@ export class SignupComponent implements OnInit {
       email:val['email'],
       password:val['password'],
     }
-    // formData.append('username',val['username']);
-    // formData.append('email',val['email']);
-    // formData.append('password',val['password']);
-    // formData.append('dob',new Date(val['dob']).toISOString());
-    // formData.append('phonenumber',val['phonenumber']);
-    // formData.append('gender',val['gender']);
-    // formData.append('nation',val['nation']);
-    // formData.append('firstname',val['firstname']);
-    // formData.append('lastname',val['lastname']);
-    // console.log(formData);
-    let cred1: FormData=new FormData();
-    cred1.append('email',val['email']);
-    cred1.append('password',val['password']);
-
-    this.signup.signUp(JSON.stringify(data),JSON.stringify(cred));
-
+    this.signup.signUp(JSON.stringify(data),JSON.stringify(cred)).subscribe(data=>{
+      console.log(data);
+      this.router.navigate(['/login']);
+    },
+      error => {
+      let message:string = error.error.message;
+      if(error.error.message.includes('E11000')){
+        if(error.error.message.includes('email'))
+          message = 'User exist with this email,\nplease use forgot password to recover the account'
+        else if(error.error.message.includes('_id'))
+          message = 'User exist with given username';
+        else if(error.error.message.includes('phonenumber'))
+          message = 'User exist with given phonenumber';
+        else
+          message = 'User already exist with one of the entered data please try to use forgotpassword'
+      }
+      this.alert.create(this.host.viewContainerRef,message,AlertModel.danger);
+      });
   }
 }

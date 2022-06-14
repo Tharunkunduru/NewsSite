@@ -26,6 +26,9 @@
 .btn:focus{
   box-shadow: none;
 }
+.btn-outline-light:active{
+  border-color: transparent;
+}
 
 .anim{
   animation-name: shadow-reverse;
@@ -37,6 +40,11 @@
   animation-fill-mode: forwards;
   animation-duration: 1s;
 }
+
+.btn:focus{
+  box-shadow: none;
+}
+
 @keyframes shadow {
   0% {   box-shadow: -0.3px -0.3px 1px grey}
   100% { box-shadow: 3px 3px 6px grey}

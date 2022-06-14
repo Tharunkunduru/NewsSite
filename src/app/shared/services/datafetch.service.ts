@@ -9,7 +9,7 @@ import {CardData} from "../interface/card-data";
 @Injectable({
   providedIn: 'root'
 })
-export class DatafetchService {
+export class DatafetchService{
   private _isFullView = false;
   public fullViewSubject:Subject<boolean> = new Subject<boolean>();
   constructor(private http: HttpClient,private gen: UrlGenerationService) {
@@ -19,11 +19,8 @@ export class DatafetchService {
   }
 
   fetchWithKey(key:string,page:number):Observable<any>{
-    return this.http.get<any>(this.gen.getUrl(key,this._isFullView,page)+'&apiKey=de6c0cfd55c34584b74a3cd51c42283a').
-    pipe(map(data=>{
-      return data['articles'];
-    }),
-    map(data => {
+    return this.http.get<any>(this.gen.getUrl(key,this._isFullView,page)).
+    pipe(map(data => {
       return this.scrutiny(data);
     }));
   }
@@ -46,4 +43,15 @@ export class DatafetchService {
     return true;
   }
 
+  addFav(data: CardData):Observable<any> {
+    return this.http.post(this.gen.genFavurl(),data);
+  }
+
+  getFavList():Observable<any> {
+    return this.http.get(this.gen.genFavListUrl());
+  }
+
+  deleteFav(url: string | null) {
+    return this.http.post(this.gen.deleteFavUrl(),url);
+  }
 }
